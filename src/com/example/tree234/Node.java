@@ -8,11 +8,12 @@ public class Node {
     private int numElems = 0;
 
 
-    public void dispNode() {
+    public void displayNode() {
         for (Data data : dataArray) {
             if (data != null)
                 data.dispData();
         }
+        System.out.println();
     }
 
     public Node getChild(int childNum) {

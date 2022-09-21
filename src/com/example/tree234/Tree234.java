@@ -76,23 +76,40 @@ public class Tree234 {
         newRight.connectChild(1, child3);
     }
 
-    public void disp() {
-        recDisp(root);
+    public void display(DisplayFormats displayFormats) {
+        switch (displayFormats) {
+            case ORDER -> recDisplay(root);
+            case NODE -> displayByNode(root, 0, 0);
+        }
         System.out.println();
     }
 
-    private void recDisp(Node current) {
-        if (current != null) {
-            int count = 0;
-            int numElem = current.getNumElems();
-            for (int i = 0; i < numElem + 1; i++) {
-                Node next = current.getChild(i);
-                recDisp(next);
-                if (count == 0) {
-                    current.dispNode();
-                    count++;
+    private void recDisplay(Node localRoot) {
+        if (localRoot != null) {
+            int num = localRoot.getNumElems();
+            for (int i = 0; i <= num; i++) {
+                Node next = localRoot.getChild(i);
+                recDisplay(next);
+                if (i < num) {
+                    localRoot.getData(i).dispData();
                 }
             }
+        }
+    }
+
+
+    public void displayByNode(Node localRoot, int level, int childNum) {
+        System.out.print("Level = " + level + ", Child = " + childNum + ", Data : ");
+        localRoot.displayNode();
+
+        int num = localRoot.getNumElems();
+
+        for (int j = 0; j < num + 1; j++) {
+            Node next = localRoot.getChild(j);
+            if (next != null) {
+                displayByNode(next, level + 1, j);
+            } else
+                return;
         }
     }
 
